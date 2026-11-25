@@ -1,6 +1,22 @@
+
+import { useState } from 'react';
+import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 
+type Screen = 'login' | 'dashboard';
+
 export default function App() {
-  // Open directly into the simulation workspace so a project demo is one click away.
-  return <div style={{ minHeight: '100%' }}><Dashboard /></div>;
+  const [screen, setScreen] = useState<Screen>('login');
+
+  return (
+    <div style={{ minHeight: '100vh' }}>
+      {screen === 'login' && (
+        <Login onLogin={() => setScreen('dashboard')} />
+      )}
+
+      {screen === 'dashboard' && (
+        <Dashboard />
+      )}
+    </div>
+  );
 }
